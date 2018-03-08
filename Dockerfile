@@ -1,12 +1,11 @@
 FROM alpine:latest
 
 WORKDIR /tmp
-RUN apk add --no-cache curl && \
-    curl -s -o bootstrap-salt.sh -L https://bootstrap.saltstack.com && \
-    sh ./bootstrap-salt.sh -X -d && \
-    mkdir -p /etc/salt/minion.d && \
-    apk del curl && \
-    ln -s /dev/stdout /var/log/salt/minion
+RUN apk add --no-cache python3 libstdc++ python3-dev build-base && \
+    pip3 install docker salt && \
+    apk del python3-dev build-base && \
+    mkdir -p /var/log/salt && \
+    mkdir -p /etc/salt/minion.d
 
 ENV MINION_ID ""
 ENV MASTER_ADDRESS "salt-master"
