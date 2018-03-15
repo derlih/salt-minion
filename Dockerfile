@@ -1,7 +1,7 @@
 FROM alpine:latest
 
 WORKDIR /tmp
-RUN apk add --no-cache python3 libstdc++ python3-dev build-base && \
+RUN apk add --no-cache docker python3 libstdc++ python3-dev build-base && \
     pip3 install docker salt && \
     apk del python3-dev build-base && \
     mkdir -p /var/log/salt && \
